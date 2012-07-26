@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ant-project>
+<project name="ExultantBuildCommon-java" basedir=".">
+	<description>
+		Java-specific extensions to the ExultantBuildCommon ant config.
+	</description>
+	
+	
+	<property name="jvers" value="1.6"/>
+	
+	
+	<macrodef name="exusJavacStrict"><!-- compiles exactly the specified set of classes and no more no less.  useful for libraries and modularization enforcement. -->
+		<attribute name="tree" default="main"/>		<!-- subdirectory of src to look under; i.e., "main"|"test" -->
+		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
+		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
+		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
+		
+		<sequential>
+			<mkdir dir="${build}/@{module}"/>
+			<javac
+				srcdir="${src}/@{tree}"
+				destdir="${build}/@{module}"
+				sourcepath=""
+				includes="@{classes}"
+				excludes="**/krap/**"
+				classpath="@{depends}"
+				debug="on"
+				deprecation="on"
+				optimize="on"
+				source="${jvers}"
+				target="${jvers}"
+				includeantruntime="false"
+				><!-- verbose="on" listfiles="on" -->
+				<compilerarg value="-Xlint:unchecked"/>
+			</javac>
+		</sequential>
+	</macrodef>
+	
+	
+	<macrodef name="exusJavac"><!-- compiles whatever it has to; this lets you specify your main class and let the rest figure itself out.  useful for applications because of the size minimalization. -->
+		<attribute name="tree" default="main"/>		<!-- subdirectory of src to look under; i.e., "main"|"test" -->
+		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
+		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
+		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
+		<sequential>
+			<mkdir dir="build/@{module}"/>
+			<javac
+				srcdir="${src}/@{tree}"
+				destdir="${build}/@{module}"
+				includes="@{classes}"
+				excludes="**/krap/**"
+				classpath="@{depends}"
+				debug="on"
+				deprecation="on"
+				optimize="on"
+				source="${jvers}"
+				target="${jvers}"
+				includeantruntime="false"
+				><!-- verbose="on" listfiles="on" -->
+				<!-- dropping the javac sourcepath="" specification is really the only difference between this and strict. -->
+				<compilerarg value="-Xlint:unchecked"/>
+			</javac>
+		</sequential>
+	</macrodef>
+</project>
