@@ -117,4 +117,12 @@
 			</copy>
 		</sequential>
 	</macrodef>
+	
+	
+	<macrodef name="validate-property">
+		<attribute name="propertyName"/>
+		<sequential>
+			<fail unless="@{propertyName}" message="@{propertyName} is a required property" />
+		</sequential>
+	</macrodef>
 </project>
