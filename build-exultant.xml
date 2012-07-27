@@ -119,6 +119,27 @@
 	</macrodef>
 	
 	
+	<macrodef name="exusPack">
+		<!--
+		    Essentially, make a zip that has a metainfo file in it.  This particular format is derived from the java/jar one, but it works equally well for python zipbangs, which is neat.
+		    This macro adds timestamps of the build and version names and git commit info to the metainfo in a standard way.  Other than that...
+		    Usage is pretty much exactly the same as the normal jar/zip ant tasks.  "manifest" tags can be nested as for the ant jar task.
+		-->
+		<attribute name="destfile" />
+		<element name="innards" implicit="yes" />
+		<sequential>
+			<jar destfile="@{destfile}">	<!-- note that supporting "basedir" is not an option; you must use other kinds of fileset.  (there's no way at the time of writing to make a macrodef attribute optional, and defaults can't be used to simulate optionalness, because having basedir on a jar task specified to anything at all, even an empty string, causes different behavior than actually not providing it. -->
+				<manifest>
+					<attribute name="Implementation-Version" value="${version}"/>
+					<attribute name="Git-Commit" value="${git-version}"/>
+					<attribute name="Build-Date" value="${builddate}"/>
+				</manifest>
+				<innards />	<!-- note that this can contain both fileset stuff and more manifest tags.  if there are more manifest tags, all of the attributes just keep accumulating, which works perfectly fine. -->
+			</jar>
+		</sequential>
+	</macrodef>
+	
+	
 	<macrodef name="validate-property">
 		<attribute name="propertyName"/>
 		<sequential>
