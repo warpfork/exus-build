@@ -116,5 +116,5 @@
 				<fileset dir="${inc}"/>
 			</copy>
 		</sequential>
-	</macrodef>	
+	</macrodef>
 </project>
