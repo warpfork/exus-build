@@ -10,6 +10,7 @@
 		Also, git is assumed.
 	</description>
 	
+	<property environment="env"/>
 	
 	<property file="build.properties"/>
 	
