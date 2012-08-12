@@ -32,16 +32,16 @@
 	<target name="exusInit" depends="exusInitId">
 		<!-- make a normal directory structure. -->
 		<mkdir dir="${src}"/>
-		<mkdir dir="${src}/main"/>
+		<mkdir dir="${src}/main"/>	<!-- if you wanna do the maven-esqe language directories under this, knock yourself out.  i'm indifferent.	-->
 		<mkdir dir="${src}/test"/>
 		<mkdir dir="${lib}"/>		<!-- things required for compilation.  may or may not end up in the tar, depending on the type of project.	-->
 		<mkdir dir="${dat}"/>		<!-- actually, tends not to be used except at runtime.								-->
 		<mkdir dir="${res}"/>		<!-- place for stuff that gets rolled into the jar (or whatever single/executable file)				-->
 		<mkdir dir="${inc}"/>		<!-- place for stuff that gets rolled into the tar (files that are accessible directly on the fs after install)	-->
-		<mkdir dir="${inc}/universal"/>	<!-- files for windows (32bit) platform										-->
-		<mkdir dir="${inc}/linux"/>	<!-- files for windows (both 32- and 64-bit) platforms					-->
-		<mkdir dir="${inc}/linux32"/>	<!-- files for windows (32bit) platform							-->
-		<mkdir dir="${inc}/linux64"/>	<!-- files for windows (32bit) platform							-->
+		<mkdir dir="${inc}/universal"/>	<!-- files for any and all platforms							-->
+		<mkdir dir="${inc}/linux"/>	<!-- files for linux (both 32- and 64-bit) platforms					-->
+		<mkdir dir="${inc}/linux32"/>	<!-- files for linux (32bit) platform							-->
+		<mkdir dir="${inc}/linux64"/>	<!-- files for linux (64bit) platform							-->
 		<mkdir dir="${inc}/win"/>	<!-- files for windows (both 32- and 64-bit) platforms					-->
 		<mkdir dir="${inc}/win32"/>	<!-- files for windows (32bit) platform							-->
 		<mkdir dir="${inc}/win64"/>	<!-- files for windows (64bit) platform							-->
