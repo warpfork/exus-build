@@ -142,9 +142,9 @@
 	
 	
 	<macrodef name="validate-property">
-		<attribute name="propertyName"/>
+		<attribute name="name"/>
 		<sequential>
-			<fail unless="@{propertyName}" message="@{propertyName} is a required property" />
+			<fail unless="@{name}" message="property '@{name}' is a required property" />
 		</sequential>
 	</macrodef>
 </project>
