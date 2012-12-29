@@ -21,7 +21,7 @@
 	<property name="inc"   value="inc"/>
 	<property name="res"   value="res"/>
 	<property name="pre"   value="pre"/>
-	<property name="build" value="bld"/>
+	<property name="build" value="build"/>
 	<property name="dist"  value="dist"/>
 	<property name="doc"   value="docs"/>
 	
