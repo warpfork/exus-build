@@ -6,7 +6,8 @@
 	</description>
 	
 	
-	<property name="jvers" value="1.6"/>
+	<property name="exus.build.java.version.source" value="1.6"/>
+	<property name="exus.build.java.version.target" value="1.6"/>
 	
 	
 	<macrodef name="exusJavacStrict"><!-- compiles exactly the specified set of classes and no more no less.  useful for libraries and modularization enforcement. -->
@@ -27,8 +28,8 @@
 				debug="on"
 				deprecation="on"
 				optimize="on"
-				source="${jvers}"
-				target="${jvers}"
+				source="${exus.build.java.version.source}"
+				target="${exus.build.java.version.target}"
 				includeantruntime="false"
 				><!-- verbose="on" listfiles="on" -->
 				<compilerarg value="-Xlint:unchecked"/>
@@ -53,8 +54,8 @@
 				debug="on"
 				deprecation="on"
 				optimize="on"
-				source="${jvers}"
-				target="${jvers}"
+				source="${exus.build.java.version.source}"
+				target="${exus.build.java.version.target}"
 				includeantruntime="false"
 				><!-- verbose="on" listfiles="on" -->
 				<!-- dropping the javac sourcepath="" specification is really the only difference between this and strict. -->
