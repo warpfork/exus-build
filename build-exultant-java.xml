@@ -18,6 +18,7 @@
 		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
 		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
 		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
+		<element name="innards" implicit="yes" />
 		
 		<sequential>
 			<mkdir dir="${target.javac}/@{module}"/>
@@ -36,6 +37,7 @@
 				includeantruntime="false"
 				><!-- verbose="on" listfiles="on" -->
 				<compilerarg value="-Xlint:unchecked"/>
+				<innards />
 			</javac>
 		</sequential>
 	</macrodef>
@@ -46,6 +48,8 @@
 		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
 		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
 		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
+		<element name="innards" implicit="yes" />
+		
 		<sequential>
 			<mkdir dir="${target.javac}/@{module}"/>
 			<javac
@@ -63,6 +67,7 @@
 				><!-- verbose="on" listfiles="on" -->
 				<!-- dropping the javac sourcepath="" specification is really the only difference between this and strict. -->
 				<compilerarg value="-Xlint:unchecked"/>
+				<innards />
 			</javac>
 		</sequential>
 	</macrodef>
