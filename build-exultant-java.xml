@@ -6,6 +6,9 @@
 	</description>
 	
 	
+	<property name="target.javac" value="${target}/classes"/>
+	
+	
 	<property name="exus.build.java.version.source" value="1.6"/>
 	<property name="exus.build.java.version.target" value="1.6"/>
 	
@@ -17,10 +20,10 @@
 		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
 		
 		<sequential>
-			<mkdir dir="${build}/@{module}"/>
+			<mkdir dir="${target.javac}/@{module}"/>
 			<javac
 				srcdir="${src}/@{tree}"
-				destdir="${build}/@{module}"
+				destdir="${target.javac}/@{module}"
 				sourcepath=""
 				includes="@{classes}"
 				excludes="**/krap/**"
@@ -44,10 +47,10 @@
 		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
 		<attribute name="depends" default=""/>		<!-- paths to other modules in build needed, or jars (if not already compiled, classfiles end up in build!); i.e., "build/main/core : lib/junit.jar"  -->
 		<sequential>
-			<mkdir dir="build/@{module}"/>
+			<mkdir dir="${target.javac}/@{module}"/>
 			<javac
 				srcdir="${src}/@{tree}"
-				destdir="${build}/@{module}"
+				destdir="${target.javac}/@{module}"
 				includes="@{classes}"
 				excludes="**/krap/**"
 				classpath="@{depends}"

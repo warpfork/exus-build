@@ -18,12 +18,13 @@
 	<property name="src"   value="src"/>
 	<property name="lib"   value="lib"/>
 	<property name="dat"   value="dat"/>
-	<property name="inc"   value="inc"/>
-	<property name="res"   value="res"/>
-	<property name="pre"   value="pre"/>
-	<property name="build" value="build"/>
-	<property name="dist"  value="dist"/>
-	<property name="doc"   value="docs"/>
+	<property name="inc"   value="${src}/inc"/>
+	<property name="res"   value="${src}/res"/>
+	<property name="pre"   value="${src}/pre"/>
+	<property name="target" value="target"/>
+	<property name="build" value="${target}"/>
+	<property name="dist"  value="${target}/dist"/>
+	<property name="doc"   value="${target}/docs"/>
 	
 	
 	<!-- importing language-specific extensions.  comment out as many or as few of these as you like. -->
@@ -36,9 +37,9 @@
 		<mkdir dir="${src}/main"/>	<!-- if you wanna do the maven-esqe language directories under this, knock yourself out.  i'm indifferent.	-->
 		<mkdir dir="${src}/test"/>
 		<mkdir dir="${lib}"/>		<!-- things required for compilation.  may or may not end up in the tar, depending on the type of project.	-->
-		<mkdir dir="${dat}"/>		<!-- actually, tends not to be used except at runtime.								-->
-		<mkdir dir="${res}"/>		<!-- place for stuff that gets rolled into the jar (or whatever single/executable file)				-->
-		<mkdir dir="${inc}"/>		<!-- place for stuff that gets rolled into the tar (files that are accessible directly on the fs after install)	-->
+		<!-- <mkdir dir="${dat}"/>	     deprecated: ${res}, ${inc}, and ${pre} replace this concept.						-->
+		<mkdir dir="${res}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff that gets rolled into the jar (or whatever single/executable file)				-->
+		<mkdir dir="${inc}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff that gets rolled into the tar (files that are accessible directly on the fs after install)	-->
 		<mkdir dir="${inc}/universal"/>	<!-- files for any and all platforms							-->
 		<mkdir dir="${inc}/linux"/>	<!-- files for linux (both 32- and 64-bit) platforms					-->
 		<mkdir dir="${inc}/linux32"/>	<!-- files for linux (32bit) platform							-->
@@ -47,7 +48,7 @@
 		<mkdir dir="${inc}/win32"/>	<!-- files for windows (32bit) platform							-->
 		<mkdir dir="${inc}/win64"/>	<!-- files for windows (64bit) platform							-->
 		<mkdir dir="${inc}/macosx"/>	<!-- files for mac platform								-->
-		<mkdir dir="${pre}"/>		<!-- place for stuff with special behaviors; typically some kind of template file or the like.  not included in final artifact.	-->
+		<mkdir dir="${pre}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff with special behaviors; typically some kind of template file or the like.  not included in final artifact.	-->
 		<mkdir dir="${doc}"/>
 		<mkdir dir="${doc}/api"/>
 		<mkdir dir="${build}"/>
