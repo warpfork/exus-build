@@ -14,6 +14,8 @@
 	
 	
 	<macrodef name="exusJavacStrict"><!-- compiles exactly the specified set of classes and no more no less.  useful for libraries and modularization enforcement. -->
+		<attribute name="srcdir" default="${src}"/>
+		<attribute name="destdir" default="${target.javac}"/>
 		<attribute name="tree" default="main"/>		<!-- subdirectory of src to look under; i.e., "main"|"test" -->
 		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
 		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
@@ -23,8 +25,8 @@
 		<sequential>
 			<mkdir dir="${target.javac}/@{module}"/>
 			<javac
-				srcdir="${src}/@{tree}"
-				destdir="${target.javac}/@{module}"
+				srcdir="@{srcdir}/@{tree}"
+				destdir="@{destdir}/@{module}"
 				sourcepath=""
 				includes="@{classes}"
 				excludes="**/krap/**"
@@ -44,6 +46,8 @@
 	
 	
 	<macrodef name="exusJavac"><!-- compiles whatever it has to; this lets you specify your main class and let the rest figure itself out.  useful for applications because of the size minimalization. -->
+		<attribute name="srcdir" default="${src}"/>
+		<attribute name="destdir" default="${target.javac}"/>
 		<attribute name="tree" default="main"/>		<!-- subdirectory of src to look under; i.e., "main"|"test" -->
 		<attribute name="module" default="@{tree}"/>	<!-- what subdirectory of build to put out under -->
 		<attribute name="classes" default="**"/>	<!-- use this to select only some classes; i.e., "us/exultant/ahs/core/**, us/exultant/ahs/util/**" -->
@@ -53,8 +57,8 @@
 		<sequential>
 			<mkdir dir="${target.javac}/@{module}"/>
 			<javac
-				srcdir="${src}/@{tree}"
-				destdir="${target.javac}/@{module}"
+				srcdir="@{srcdir}/@{tree}"
+				destdir="@{destdir}/@{module}"
 				includes="@{classes}"
 				excludes="**/krap/**"
 				classpath="@{depends}"
