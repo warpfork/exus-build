@@ -35,7 +35,9 @@
 		<!-- make a normal directory structure. -->
 		<mkdir dir="${src}"/>
 		<mkdir dir="${src}/main"/>	<!-- if you wanna do the maven-esqe language directories under this, knock yourself out.  i'm indifferent.	-->
-		<mkdir dir="${src}/test"/>
+		<mkdir dir="${src}/test-fixtures"/>
+		<mkdir dir="${src}/test-unit"/>
+		<mkdir dir="${src}/test-integration"/>
 		<mkdir dir="${build}"/>
 		<mkdir dir="${build}/main"/>
 		<mkdir dir="${build}/test"/>
