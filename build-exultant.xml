@@ -24,7 +24,7 @@
 	<property name="target" value="target"/>
 	<property name="build" value="${target}"/>
 	<property name="dist"  value="${target}/dist"/>
-	<property name="doc"   value="${target}/docs"/>
+	<property name="doc"   value="doc"/>
 	
 	
 	<target name="exusInit" depends="exusInitId">
