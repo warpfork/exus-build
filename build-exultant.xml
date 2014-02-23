@@ -134,7 +134,7 @@
 		    Usage is pretty much exactly the same as the normal jar/zip ant tasks.  "manifest" tags can be nested as for the ant jar task.
 		-->
 		<attribute name="destfile" />
-		<element name="innards" implicit="yes" />
+		<element name="innards" implicit="yes" optional="yes" />
 		<sequential>
 			<jar destfile="@{destfile}">	<!-- note that supporting "basedir" is not an option; you must use other kinds of fileset.  (there's no way at the time of writing to make a macrodef attribute optional, and defaults can't be used to simulate optionalness, because having basedir on a jar task specified to anything at all, even an empty string, causes different behavior than actually not providing it. -->
 				<manifest>
