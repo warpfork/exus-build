@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ant-project>
+<project name="ExultantBuildCommon-php" basedir=".">
+	<description>
+		PHP-specific extensions to the ExultantBuildCommon ant config.
+	</description>
+
+	<target name="phplint">
+		<apply executable="php" failonerror="true">
+			<arg value="-l" />
+			<fileset dir="${src}">
+				<include name="**/*.php" />
+			</fileset>
+		</apply>
+
+		<fileset id="files-containing-fixme" dir="${src}">
+			<include name="**/*.php" />
+			<contains text="#FIXME:"/>
+		</fileset>
+		<fail message="The following files contain \"fixme\"s: ${ant.refid:files-containing-fixme}">
+			<condition><resourcecount when="greater" count="0" refid="files-containing-fixme"/></condition>
+		</fail>
+	</target>
+</project>

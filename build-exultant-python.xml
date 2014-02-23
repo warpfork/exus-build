@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ant-project>
+<project name="ExultantBuildCommon-php" basedir=".">
+	<description>
+		Python-specific extensions to the ExultantBuildCommon ant config.
+	</description>
+
+
+	<target name="bang"
+                depends="zip"
+                description="cat a shebang onto the front of the zip file so that it Just Works when run"
+                >
+                <concat destfile="${dist}/${app}" binary="true">
+                        <concat>#!/usr/bin/env python
+</concat><!-- the ugly whitespace is semantic. -->
+                        <fileset file="${build}/${app}.zip" />
+                </concat>
+                <chmod file="${dist}/${app}" perm="755" />
+        </target>
+</project>
