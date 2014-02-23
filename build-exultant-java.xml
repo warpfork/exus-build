@@ -9,8 +9,8 @@
 	<property name="target.javac" value="${target}/classes"/>
 	
 	
-	<property name="exus.build.java.version.source" value="1.6"/>
-	<property name="exus.build.java.version.target" value="1.6"/>
+	<property name="exus.build.java.version.source" value="1.7"/>
+	<property name="exus.build.java.version.target" value="1.7"/>
 	
 	
 	<macrodef name="exusJavacStrict"><!-- compiles exactly the specified set of classes and no more no less.  useful for libraries and modularization enforcement. -->
