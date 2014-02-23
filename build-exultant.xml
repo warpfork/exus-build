@@ -27,10 +27,6 @@
 	<property name="doc"   value="${target}/docs"/>
 	
 	
-	<!-- importing language-specific extensions.  comment out as many or as few of these as you like. -->
-	<import file="build-exultant-java.xml"/>
-	
-	
 	<target name="exusInit" depends="exusInitId">
 		<!-- make a normal directory structure. -->
 		<mkdir dir="${src}"/>
