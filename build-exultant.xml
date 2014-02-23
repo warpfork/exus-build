@@ -27,15 +27,30 @@
 	<property name="doc"   value="doc"/>
 	
 	
-	<target name="exusInit" depends="exusInitId">
+	<target name="exusInit" depends="exusInitId,exusInitLayout">
+	</target>
+	
+	
+	<target name="exusInitLayout">
 		<!-- make a normal directory structure. -->
 		<mkdir dir="${src}"/>
 		<mkdir dir="${src}/main"/>	<!-- if you wanna do the maven-esqe language directories under this, knock yourself out.  i'm indifferent.	-->
 		<mkdir dir="${src}/test"/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build}/main"/>
+		<mkdir dir="${build}/test"/>
 		<mkdir dir="${lib}"/>		<!-- things required for compilation.  may or may not end up in the tar, depending on the type of project.	-->
-		<!-- <mkdir dir="${dat}"/>	     deprecated: ${res}, ${inc}, and ${pre} replace this concept.						-->
+		<mkdir dir="${doc}"/>
+		<mkdir dir="${doc}/api"/>
+		<mkdir dir="${dist}"/>
+	</target>
+	<target name="exusInitLayoutAll" depends="exusInitLayout">
 		<mkdir dir="${res}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff that gets rolled into the jar (or whatever single/executable file)				-->
 		<mkdir dir="${inc}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff that gets rolled into the tar (files that are accessible directly on the fs after install)	-->
+		<mkdir dir="${pre}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff with special behaviors; typically some kind of template file or the like.  not included in final artifact.	-->
+	</target>
+	<target name="exusInitLayoutPlatforms" depends="exusInitLayout">
+		<!-- the 'exusIncArch' macro may be helpful for use if you wish to ship platform specific components alongside your product (i.e. inc-style in the tar; it doesn't help with res-style). -->
 		<mkdir dir="${inc}/universal"/>	<!-- files for any and all platforms							-->
 		<mkdir dir="${inc}/linux"/>	<!-- files for linux (both 32- and 64-bit) platforms					-->
 		<mkdir dir="${inc}/linux32"/>	<!-- files for linux (32bit) platform							-->
@@ -44,13 +59,6 @@
 		<mkdir dir="${inc}/win32"/>	<!-- files for windows (32bit) platform							-->
 		<mkdir dir="${inc}/win64"/>	<!-- files for windows (64bit) platform							-->
 		<mkdir dir="${inc}/macosx"/>	<!-- files for mac platform								-->
-		<mkdir dir="${pre}"/>		<!-- deprecated: recommend using a subdir of src. --><!-- place for stuff with special behaviors; typically some kind of template file or the like.  not included in final artifact.	-->
-		<mkdir dir="${doc}"/>
-		<mkdir dir="${doc}/api"/>
-		<mkdir dir="${build}"/>
-		<mkdir dir="${build}/main"/>
-		<mkdir dir="${build}/test"/>
-		<mkdir dir="${dist}"/>
 	</target>
 	
 	
