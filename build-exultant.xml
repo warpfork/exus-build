@@ -39,8 +39,6 @@
 		<mkdir dir="${src}/test-unit"/>
 		<mkdir dir="${src}/test-integration"/>
 		<mkdir dir="${build}"/>
-		<mkdir dir="${build}/main"/>
-		<mkdir dir="${build}/test"/>
 		<mkdir dir="${lib}"/>		<!-- things required for compilation.  may or may not end up in the tar, depending on the type of project.	-->
 		<mkdir dir="${doc}"/>
 		<mkdir dir="${doc}/api"/>
