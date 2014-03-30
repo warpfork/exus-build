@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ant-project>
+<project name="ExultantBuildCommon-mdm" basedir=".">
+	<description>
+		Bootstrap utils and wrappers for common mdm uses, to help dropship your project onto unprepared shores.
+	</description>
+
+
+	<available property="mdm.available" file="mdm" filepath="${env.PATH}"/>
+	<target name="-bootstrap-mdm" unless="mdm.available">
+		<!--
+			Check for a locally available mdm executable; fetch mdm binaries if nothing's available.
+			Currently pegged to a version number because there's no handily available "lastest/" link.
+		-->
+		<property name="mdm.version" value="v2.14.1" />
+		<property name="mdm.url" value="https://raw.github.com/mdm-releases/mdm-releases/master/" />
+		<property name="mdm.dir" value="${user.home}/.mdm/installs/${mdm.version}/" />
+		<mkdir dir="${mdm.dir}" />
+		<get
+			src="${mdm.url}/${mdm.version}/mdm"
+			dest="${mdm.dir}" skipexisting="true" verbose="true"
+		/>
+		<chmod file="${mdm.dir}/mdm" perm="+x"/>
+		<get
+			src="${mdm.url}/${mdm.version}/mdm.jar"
+			dest="${mdm.dir}" skipexisting="true" verbose="true"
+		/>
+		<chmod file="${mdm.dir}/mdm.jar" perm="+x"/>
+	</target>
+
+
+	<target name="-bootstrap-mdm-modules" depends="-bootstrap-mdm">
+		<!--
+			Do an mdm-update, which will fetch all dependency modules.
+		-->
+		<!--
+			Implementation detail: note the use of 'env' vars; assumes build-exultant.xml already loaded,
+			or someone else put env there; otherwise we'll fail to see existing $PATH.
+		-->
+		<exec executable="mdm" vmlauncher="false">
+			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
+			<arg value="--version"/>
+		</exec>
+		<exec executable="mdm" vmlauncher="false">
+			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
+			<arg value="update"/>
+		</exec>
+	</target>
+</project>
