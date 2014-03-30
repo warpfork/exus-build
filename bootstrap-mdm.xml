@@ -11,6 +11,9 @@
 		<!--
 			Check for a locally available mdm executable; fetch mdm binaries if nothing's available.
 			Currently pegged to a version number because there's no handily available "lastest/" link.
+
+			This will not do the "Right Thing"(tm) if there's some other executable called `mdm` on
+			the system which isn't the one we meant.
 		-->
 		<property name="mdm.version" value="v2.14.1" />
 		<property name="mdm.url" value="https://raw.github.com/mdm-releases/mdm-releases/master/" />
