@@ -8,7 +8,8 @@
 
 	<!--
 		Recommended copypasta for bootstrapping the bootstrap:
-
+	-->
+	<?wannabecomment <![CDATA[
 		<exec executable="git" failonerror="true">
 			<arg value="submodule"/>
 			<arg value="update"/>
@@ -17,8 +18,7 @@
 		</exec>
 		<import file="lib/exus-build/build-exultant.xml"/>
 		<import file="lib/exus-build/bootstrap-mdm.xml"/>
-
-	-->
+	]]> ?>
 
 
 	<available property="mdm.available" file="mdm" filepath="${env.PATH}"/>
