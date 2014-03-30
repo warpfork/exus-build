@@ -37,12 +37,12 @@
 			Implementation detail: note the use of 'env' vars; assumes build-exultant.xml already loaded,
 			or someone else put env there; otherwise we'll fail to see existing $PATH.
 		-->
-		<exec executable="mdm" vmlauncher="false">
+		<exec executable="mdm" vmlauncher="false" failonerror="true">
 			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
 			<arg value="--version"/>
 		</exec>
 		<echo>mdm reporting in.  fetching dependencies; this may take a few minutes depending on your internet connection.</echo>
-		<exec executable="mdm" vmlauncher="false">
+		<exec executable="mdm" vmlauncher="false" failonerror="true">
 			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
 			<arg value="update"/>
 		</exec>
