@@ -6,6 +6,21 @@
 	</description>
 
 
+	<!--
+		Recommended copypasta for bootstrapping the bootstrap:
+
+		<exec executable="git" failonerror="true">
+			<arg value="submodule"/>
+			<arg value="update"/>
+			<arg value="--init"/>
+			<arg value="lib/exus-build"/>
+		</exec>
+		<import file="lib/exus-build/build-exultant.xml"/>
+		<import file="lib/exus-build/bootstrap-mdm.xml"/>
+
+	-->
+
+
 	<available property="mdm.available" file="mdm" filepath="${env.PATH}"/>
 	<target name="-bootstrap-mdm" unless="mdm.available">
 		<!--
