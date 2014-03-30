@@ -41,6 +41,7 @@
 			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
 			<arg value="--version"/>
 		</exec>
+		<echo>mdm reporting in.  fetching dependencies; this may take a few minutes depending on your internet connection.</echo>
 		<exec executable="mdm" vmlauncher="false">
 			<env key="PATH" path="${env.PATH}:${mdm.dir}"/>
 			<arg value="update"/>
