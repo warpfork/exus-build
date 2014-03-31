@@ -18,6 +18,11 @@
 		</exec>
 		<import file="lib/exus-build/build-exultant.xml"/>
 		<import file="lib/exus-build/bootstrap-mdm.xml"/>
+
+		<!-- now just add this dependency to your project's existing targets: -->
+		<target name="init"
+			depends="-bootstrap-mdm-modules">
+		</target>
 	]]> ?>
 
 
