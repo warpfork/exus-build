@@ -36,7 +36,7 @@
 			the system which isn't the one we meant.
 		-->
 		<property name="mdm.version" value="v2.16.1" />
-		<property name="mdm.url" value="https://raw.github.com/mdm-releases/mdm-releases/master/" />
+		<property name="mdm.url" value="https://raw.githubusercontent.com/mdm-releases/mdm-releases/master/" />
 		<property name="mdm.dir" value="${user.home}/.mdm/installs/${mdm.version}/" />
 		<mkdir dir="${mdm.dir}" />
 		<get
