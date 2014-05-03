@@ -43,6 +43,10 @@
 			src="${mdm.url}${mdm.version}/mdm"
 			dest="${mdm.dir}" skipexisting="true" verbose="true"
 		/>
+		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha1"   algorithm="SHA-1"   property="cb074fbeb2a831da6b35283f9adafef2c449dd1a"/>
+		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha384" algorithm="SHA-384" property="928ba075f4ed51eb9b99c6dee252cf0d70cb06146311574abdb685678646cf0c77821e54eaba76faa78372a22dc03ce4"/>
+		<fail unless="${verify-mdm-sha1}" message="fetched mdm executable failed sha1 checksum!  this is not the binary you are looking for!" />
+		<fail unless="${verify-mdm-sha384}" message="fetched mdm executable failed sha384 checksum!  this is not the binary you are looking for!" />
 		<chmod file="${mdm.dir}/mdm" perm="+x"/>
 	</target>
 
