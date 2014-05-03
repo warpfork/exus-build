@@ -102,6 +102,7 @@
 				</concat>
 				<fileset file="@{src}" />
 			</concat>
+			<chmod file="@{dest}" perm="755"/>
 		</sequential>
 	</macrodef>
 </project>
