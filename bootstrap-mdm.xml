@@ -40,7 +40,7 @@
 		<property name="mdm.dir" value="${user.home}/.mdm/installs/${mdm.version}/" />
 		<mkdir dir="${mdm.dir}" />
 		<get
-			src="${mdm.url}/${mdm.version}/mdm"
+			src="${mdm.url}${mdm.version}/mdm"
 			dest="${mdm.dir}" skipexisting="true" verbose="true"
 		/>
 		<chmod file="${mdm.dir}/mdm" perm="+x"/>
