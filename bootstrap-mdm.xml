@@ -35,7 +35,7 @@
 			This will not do the "Right Thing"(tm) if there's some other executable called `mdm` on
 			the system which isn't the one we meant.
 		-->
-		<property name="mdm.version" value="v2.14.1" />
+		<property name="mdm.version" value="v2.16.1" />
 		<property name="mdm.url" value="https://raw.github.com/mdm-releases/mdm-releases/master/" />
 		<property name="mdm.dir" value="${user.home}/.mdm/installs/${mdm.version}/" />
 		<mkdir dir="${mdm.dir}" />
@@ -44,11 +44,6 @@
 			dest="${mdm.dir}" skipexisting="true" verbose="true"
 		/>
 		<chmod file="${mdm.dir}/mdm" perm="+x"/>
-		<get
-			src="${mdm.url}/${mdm.version}/mdm.jar"
-			dest="${mdm.dir}" skipexisting="true" verbose="true"
-		/>
-		<chmod file="${mdm.dir}/mdm.jar" perm="+x"/>
 	</target>
 
 
