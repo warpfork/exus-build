@@ -26,7 +26,7 @@
 	]]> ?>
 
 
-	<available property="mdm.available" file="mdm" filepath="${env.PATH}"/>
+	<available property="mdm.available" file="mdm" type="file" filepath="${env.PATH}"/>
 	<target name="-bootstrap-mdm" unless="mdm.available">
 		<!--
 			Check for a locally available mdm executable; fetch mdm binaries if nothing's available.
