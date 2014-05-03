@@ -13,6 +13,8 @@
 	<property name="exus.build.java.version.target" value="1.7"/>
 	
 	
+	<!-- these macros might actually be well implemented as presetdef's instead.  see https://mail-archives.apache.org/mod_mbox/ant-user/200401.mbox/%3CD44A54C298394F4E967EC8538B1E00F10248CE54@lgchexch002.lgc.com%3E -->
+
 	<macrodef name="exusJavacStrict"><!-- compiles exactly the specified set of classes and no more no less.  useful for libraries and modularization enforcement. -->
 		<attribute name="srcdir" default="${src}"/>
 		<attribute name="destdir" default="${target.javac}"/>
