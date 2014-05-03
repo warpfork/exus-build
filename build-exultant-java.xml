@@ -77,4 +77,31 @@
 			</javac>
 		</sequential>
 	</macrodef>
+
+
+	<macrodef name="exusJavaBang">
+		<!--
+			Makes an executable file out of a jar.
+			Works on *nix-ish platforms by assuming the existence of a few keywords of posix shell and exploiting the fact a zip file can have an arbitrary prefix.
+			See also http://mesosphere.io/2013/12/07/executable-jars/
+		-->
+		<attribute name="src" default="${dist}/${app}.jar"/>
+		<attribute name="dest" default="${dist}/${app}"/>
+
+		<sequential>
+			<concat destfile="@{dest}" binary="true">
+				<concat encoding="UTF-8">
+					<concat>
+						exec java -jar "$0" "$@"
+						exit
+					</concat>
+					<filterchain>
+						<deletecharacters chars="\t"/>
+						<headfilter lines="-1" skip="1"/>
+					</filterchain>
+				</concat>
+				<fileset file="@{src}" />
+			</concat>
+		</sequential>
+	</macrodef>
 </project>
