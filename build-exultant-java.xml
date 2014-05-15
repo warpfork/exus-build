@@ -92,6 +92,7 @@
 			<concat destfile="@{dest}" binary="true">
 				<concat encoding="UTF-8">
 					<concat>
+						#!/bin/sh
 						exec java -jar "$0" "$@"
 						exit
 					</concat>
