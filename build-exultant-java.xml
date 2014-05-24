@@ -25,7 +25,7 @@
 		<element name="innards" implicit="yes" optional="yes" />
 		
 		<sequential>
-			<mkdir dir="${target.javac}/@{module}"/>
+			<mkdir dir="@{destdir}/@{module}"/>
 			<javac
 				srcdir="@{srcdir}/@{tree}"
 				destdir="@{destdir}/@{module}"
@@ -57,7 +57,7 @@
 		<element name="innards" implicit="yes" optional="yes" />
 		
 		<sequential>
-			<mkdir dir="${target.javac}/@{module}"/>
+			<mkdir dir="@{destdir}/@{module}"/>
 			<javac
 				srcdir="@{srcdir}/@{tree}"
 				destdir="@{destdir}/@{module}"
