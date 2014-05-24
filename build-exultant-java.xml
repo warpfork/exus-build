@@ -26,6 +26,7 @@
 		
 		<sequential>
 			<mkdir dir="@{destdir}/@{module}"/>
+			<depend srcdir="@{srcdir}/@{tree}" destdir="@{destdir}/@{module}" cache="@{destdir}/@{module}/.dep" />
 			<javac
 				srcdir="@{srcdir}/@{tree}"
 				destdir="@{destdir}/@{module}"
@@ -58,6 +59,7 @@
 		
 		<sequential>
 			<mkdir dir="@{destdir}/@{module}"/>
+			<depend srcdir="@{srcdir}/@{tree}" destdir="@{destdir}/@{module}" cache="@{destdir}/@{module}/.dep" />
 			<javac
 				srcdir="@{srcdir}/@{tree}"
 				destdir="@{destdir}/@{module}"
