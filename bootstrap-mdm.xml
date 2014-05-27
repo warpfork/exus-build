@@ -35,7 +35,7 @@
 			This will not do the "Right Thing"(tm) if there's some other executable called `mdm` on
 			the system which isn't the one we meant.
 		-->
-		<property name="mdm.version" value="v2.16.1" />
+		<property name="mdm.version" value="v2.17.0" />
 		<property name="mdm.url" value="https://raw.githubusercontent.com/mdm-releases/mdm-releases/master/" />
 		<property name="mdm.dir" value="${user.home}/.mdm/installs/${mdm.version}/" />
 		<mkdir dir="${mdm.dir}" />
@@ -43,8 +43,8 @@
 			src="${mdm.url}${mdm.version}/mdm"
 			dest="${mdm.dir}" skipexisting="true" verbose="true"
 		/>
-		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha1"   algorithm="SHA-1"   property="cb074fbeb2a831da6b35283f9adafef2c449dd1a"/>
-		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha384" algorithm="SHA-384" property="928ba075f4ed51eb9b99c6dee252cf0d70cb06146311574abdb685678646cf0c77821e54eaba76faa78372a22dc03ce4"/>
+		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha1"   algorithm="SHA-1"   property="2d3b6da53b62ecbcade112b5ac9ee0e9f726d23e"/>
+		<checksum file="${mdm.dir}/mdm" verifyproperty="verify-mdm-sha384" algorithm="SHA-384" property="db6ccd30dee8644aa8e336a1d2050ec38f3626a1237e230bc22bab9b757aff976b5e8c513efc18779e697f9fc19ee879"/>
 		<fail unless="${verify-mdm-sha1}" message="fetched mdm executable failed sha1 checksum!  this is not the binary you are looking for!" />
 		<fail unless="${verify-mdm-sha384}" message="fetched mdm executable failed sha384 checksum!  this is not the binary you are looking for!" />
 		<chmod file="${mdm.dir}/mdm" perm="+x"/>
