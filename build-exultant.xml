@@ -132,12 +132,16 @@
 		    Usage is pretty much exactly the same as the normal jar/zip ant tasks.  "manifest" tags can be nested as for the ant jar task.
 		-->
 		<attribute name="destfile" />
+		<attribute name="rezip-refid" default="" />
 		<element name="innards" implicit="yes" optional="yes" />
 		<sequential>
+			<!-- Prepare a list of other zip files from a path refid.  We will fold the contents of these into our new zip. -->
 			<local name="ziplist"/>
-			<pathconvert pathsep=" " property="ziplist" refid="app.path.main.runtime">
+			<pathconvert pathsep=" " property="ziplist" refid="@{rezip-refid}">
 				<globmapper from="${basedir}/*" to="*"/> <!-- because ant is insane, this will give us absolute paths by default, zipgroupfileset would try to resolve them against "." anyway -.- -->
 			</pathconvert>
+
+			<!-- Make the pack. -->
 			<jar destfile="@{destfile}">	<!-- note that supporting "basedir" is not an option; you must use other kinds of fileset.  (there's no way at the time of writing to make a macrodef attribute optional, and defaults can't be used to simulate optionalness, because having basedir on a jar task specified to anything at all, even an empty string, causes different behavior than actually not providing it. -->
 				<manifest>
 					<attribute name="Implementation-Version" value="${version}"/>
@@ -145,6 +149,7 @@
 					<attribute name="Build-Date" value="${builddate}"/>
 				</manifest>
 
+				<!-- Fold files from other zips into this one. -->
 				<zipgroupfileset dir="." includes="${ziplist}"/>
 				<!--
 					Note: this does not preserve order of the inputs.  A zip file itself, interestingly, does.
