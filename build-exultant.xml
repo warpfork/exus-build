@@ -152,9 +152,11 @@
 				<!-- Fold files from other zips into this one. -->
 				<zipgroupfileset dir="." includes="${ziplist}"/>
 				<!--
-					Note: this does not preserve order of the inputs.  A zip file itself, interestingly, does.
-					So adding items or removing items in the list over time or using a different runtime with a conincidentally different natural ordering for a set... may result in a zip with a different order of entries.
-					I can't imagine why this would be a bother unless you're worried about deduplicating large amounts of static blobs you've thrown together in a zip.  (Shame that's *exactly* what I do with most builds.  Damnit, ant.)
+					Note: A zip file preserves some notion of the order in which files were added to it.
+					This use of zipgroupfileset does not preserve order of the inputs as you've listed them.  Instead, it appears to sort the incoming files first, then add their contents in this order.
+					If you use a sequence of `<zipfileset src="a.jar"/><zipfileset src="b.jar"/>` yourself, files from those archives will be appended to the zip in the order you specifiy.
+					Mostly, this is probably uninteresting to the consumer (I can't imagine why one would be concerned about the interal ordering unless you're worried about deduplicating large amounts of static blobs you've thrown together in a zip).
+					And fortunately, if you are concerned about this ordering, it is probably because you want it to be stable over time.  And it appears the default sorting behaviors provide exactly that.
 				-->
 				<!--
 					Note for jars: this does not filter out META_INF/*
