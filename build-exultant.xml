@@ -134,12 +134,42 @@
 		<attribute name="destfile" />
 		<element name="innards" implicit="yes" optional="yes" />
 		<sequential>
+			<local name="ziplist"/>
+			<pathconvert pathsep=" " property="ziplist" refid="app.path.main.runtime">
+				<globmapper from="${basedir}/*" to="*"/> <!-- because ant is insane, this will give us absolute paths by default, zipgroupfileset would try to resolve them against "." anyway -.- -->
+			</pathconvert>
 			<jar destfile="@{destfile}">	<!-- note that supporting "basedir" is not an option; you must use other kinds of fileset.  (there's no way at the time of writing to make a macrodef attribute optional, and defaults can't be used to simulate optionalness, because having basedir on a jar task specified to anything at all, even an empty string, causes different behavior than actually not providing it. -->
 				<manifest>
 					<attribute name="Implementation-Version" value="${version}"/>
 					<attribute name="Git-Commit" value="${git-version}"/>
 					<attribute name="Build-Date" value="${builddate}"/>
 				</manifest>
+
+				<zipgroupfileset dir="." includes="${ziplist}"/>
+				<!--
+					Note: this does not preserve order of the inputs.  A zip file itself, interestingly, does.
+					So adding items or removing items in the list over time or using a different runtime with a conincidentally different natural ordering for a set... may result in a zip with a different order of entries.
+					I can't imagine why this would be a bother unless you're worried about deduplicating large amounts of static blobs you've thrown together in a zip.  (Shame that's *exactly* what I do with most builds.  Damnit, ant.)
+				-->
+				<!--
+					Note for jars: this does not filter out META_INF/*
+					Which you would often think is a reasonable thing.  However, as many people bung this up as not; netty for example ships their natives under that dir -.-
+					Fortunately, the manifest task seems to overide any other manifest files that might be dragged along, so things like your main method appear to be fine.
+				-->
+
+				<!--
+					other attempted mechanisms for uberjar'ing:
+					using the ant 1.8 collections works, and would be the more attractive option... but is unbearably slow.  We're talking about a 1.2sec process becoming a 31sec process.
+					see the terminal comment of this thread for why: http://ant.1045680.n5.nabble.com/web-site-example-does-not-work-td1353613.html
+					something ridiculous like opening and reseeking the archive every time because they couldn't be arsed to make a finalizer/cleanup pattern for resources...?
+
+					<archives>
+						<zips>
+							<path refid="app.path.deps.main.compile" />
+						</zips>
+					</archives>
+				-->
+
 				<innards />	<!-- note that this can contain both fileset stuff and more manifest tags.  if there are more manifest tags, all of the attributes just keep accumulating, which works perfectly fine. -->
 			</jar>
 		</sequential>
