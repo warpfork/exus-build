@@ -140,6 +140,11 @@
 			<pathconvert pathsep=" " property="ziplist" refid="@{rezip-refid}">
 				<globmapper from="${basedir}/*" to="*"/> <!-- because ant is insane, this will give us absolute paths by default, zipgroupfileset would try to resolve them against "." anyway -.- -->
 			</pathconvert>
+			<local name="globlist"/>
+			<pathconvert pathsep=" " property="globlist" refid="@{rezip-refid}">
+				<regexpmapper from="${basedir}/(.*)$" to="\1/**"/> <!-- double your globs, double your fun.  if i can put a "/**" on the end and get something, it must have been a dir, right?  just kidding, can't actually use globs because the stars get evaluated in an undesired order, full steam regex -->
+				<!-- this still doesn't actually work as intended, because what we want are the files from these dirs, mapped *without* their leading stuff.  and we can't generate filesets (well, without making a plugin, anyway). -->
+			</pathconvert>
 
 			<!-- Make the pack. -->
 			<jar destfile="@{destfile}">	<!-- note that supporting "basedir" is not an option; you must use other kinds of fileset.  (there's no way at the time of writing to make a macrodef attribute optional, and defaults can't be used to simulate optionalness, because having basedir on a jar task specified to anything at all, even an empty string, causes different behavior than actually not providing it. -->
@@ -151,6 +156,7 @@
 
 				<!-- Fold files from other zips into this one. -->
 				<zipgroupfileset dir="." includes="${ziplist}"/>
+				<fileset dir="." includes="${globlist}"/>
 				<!--
 					Note: A zip file preserves some notion of the order in which files were added to it.
 					This use of zipgroupfileset does not preserve order of the inputs as you've listed them.  Instead, it appears to sort the incoming files first, then add their contents in this order.
